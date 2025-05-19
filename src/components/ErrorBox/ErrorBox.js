@@ -4,10 +4,10 @@ import styles from './ErrorBox.module.scss';
 const ErrorBox = ({ children }) => {
   return (
     <div className={styles.errorBox}>
-      <h1>
+      <h2>
         <span className="fa fa-exclamation-triangle" />
         Error
-      </h1>
+      </h2>
       <p>
         {children}
       </p>

@@ -8,7 +8,7 @@ const WeatherBox = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [weather, setWeather] = useState(null);
-    const APIkey = '6e3d542193231f0e22246cd445dc77de';
+    const APIkey = process.env.REACT_APP_OPENWEATHER_API_KEY;
     const handleCityChange = useCallback((newCity) => {
         setError(false)
         setLoading(true);
@@ -24,8 +24,6 @@ const WeatherBox = () => {
                             description: data.weather[0].main
                         };
                         setWeather(weatherData)
-                        setLoading(false);
-                        console.log(data);
                     })
                 }
                 else {
@@ -33,6 +31,13 @@ const WeatherBox = () => {
                     setError(true)
                 }
             })
+            .catch(err => {
+                console.error('Fetch error:', err);
+                setError(true);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     }, [])
   return (
     <section>
